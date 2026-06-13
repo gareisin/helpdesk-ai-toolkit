@@ -1,55 +1,65 @@
-# Help Desk Triage Agent
+# Help Desk AI Toolkit
 
-An LLM-powered ticket triage system for an IT help desk. It reads an inbound support
-ticket, retrieves relevant knowledge base context, proposes a classification and
-priority, identifies the minimum information a technician still needs, and drafts a
-Tier-1 reply — **as a proposal for human review, never an automated action.**
+Two LLM-powered tools for an IT help desk, built on a shared classification core:
 
-It ships with a second utility, a portable **bulk categorizer** that cleans up a backlog
-of mis-categorized tickets with a two-stage keyword-then-LLM pipeline.
+1. **Triage Agent** — reads an inbound ticket, retrieves knowledge base context, and
+   proposes a category, priority, the information a technician still needs, and a draft
+   Tier-1 reply. A proposal for human review — never an automated action.
+2. **Bulk Categorizer** — a portable utility that cleans up a backlog of mis-categorized
+   tickets with a two-stage keyword-then-LLM pipeline.
 
-The headline design choice is a **hybrid model architecture exposed as a single config
-boundary**: a frontier model can design and supervise while a local open-source model
-handles routine, high-volume inference cheaply and with no ticket data leaving the
-building. Which one runs is one environment variable.
+They're separate tools with separate entry points and separate jobs. They share one
+taxonomy, one keyword classifier, and one model client — which is exactly the
+relationship they had in production, where the categorizer established the category
+taxonomy that the triage agent then built on.
+
+The design choice tying it all together is a **hybrid model architecture exposed as a
+single config boundary**: a frontier model can design and supervise, while a local
+open-source model handles routine, high-volume inference cheaply and with no ticket data
+leaving the building. Which one runs is one environment variable.
 
 > Self-contained and runnable with zero setup. All data is synthetic — there is no
 > resemblance to any real organization or ticket data.
 
 ---
 
-## The problem
+## Shared architecture
 
-Inbound tickets arrive with wildly uneven detail. Technicians spend their first contact
-gathering basics — device, error message, what the user already tried — before any real
-work starts. Categorization and priority are applied inconsistently at intake, which
-makes routing, reporting, and trend analysis unreliable.
-
-This project standardizes first contact: every ticket arrives pre-classified, pre-enriched
-with KB context, and accompanied by a drafted reply and a short list of the exact questions
-a technician needs answered — while keeping a human firmly in the loop.
-
----
-
-## Architecture
+Both tools sit on the same foundation. `config.py` holds the taxonomy and the provider
+swap; `scoring.py` is the deterministic keyword classifier used by both; `llm_client.py`
+exposes one interface over three interchangeable backends.
 
 ```mermaid
 flowchart TD
-    A[Inbound ticket text] --> B[KB retrieval<br/>keyword match over mock KB]
-    B --> C{LLM client<br/>LLM_PROVIDER}
-    C -->|mock| D[Deterministic<br/>offline, zero-setup]
-    C -->|ollama| E[Local open-source model<br/>cheap runtime tier]
-    C -->|anthropic| F[Frontier Claude model<br/>architect tier]
-    D --> G[Validate + coerce<br/>untrusted model output]
-    E --> G
-    F --> G
-    G --> H[Triage proposal:<br/>category, priority, missing info, draft reply]
-    H --> I[[Human technician review<br/>no automated action]]
+    subgraph shared [Shared core]
+        S1[config.py<br/>taxonomy + swap point]
+        S2[scoring.py<br/>keyword classifier]
+        S3{llm_client<br/>LLM_PROVIDER}
+        S3 -->|mock| M[Deterministic<br/>offline, zero-setup]
+        S3 -->|ollama| O[Local open-source model<br/>cheap runtime tier]
+        S3 -->|anthropic| F[Frontier Claude model<br/>architect tier]
+    end
+
+    subgraph t1 [Tool 1 - Triage Agent]
+        A[Inbound ticket] --> KB[KB retrieval] --> TR[triage proposal]
+        TR --> HU[[Human technician review<br/>no automated action]]
+    end
+
+    subgraph t2 [Tool 2 - Bulk Categorizer]
+        C[CSV backlog] --> ST1[Stage 1: keyword<br/>resolves the obvious, free]
+        ST1 --> ST2[Stage 2: LLM fallback<br/>only the ambiguous]
+        ST2 --> OUT[clean CSV + audit columns]
+    end
+
+    KB --> S3
+    ST2 --> S3
+    M --> V[Validate + coerce<br/>untrusted model output]
+    O --> V
+    F --> V
 ```
 
-The same three providers back the bulk categorizer's second stage. **`config.py` is the
-swap point** — set `LLM_PROVIDER` and every model call in the project moves between tiers
-without touching any other code.
+**`config.py` is the swap point** — set `LLM_PROVIDER` and every model call in both tools
+moves between tiers without touching any other code.
 
 ### Why hybrid — the cost & privacy thesis
 
@@ -65,13 +75,50 @@ without touching any other code.
   thousand routine inferences a day. Making the boundary a single config line means you
   choose per-deployment, not per-rewrite.
 
-### Security posture (carried over from the real system's design)
+### Security posture (carried over from the production design)
 
-- **Human-in-the-loop is mandatory.** The agent only ever produces a proposal; it never
-  creates, edits, or closes a ticket.
+- **Human-in-the-loop is mandatory.** The triage agent only ever produces a proposal; it
+  never creates, edits, or closes a ticket.
 - **Model output is untrusted data.** Every model response passes through a validation /
   coercion layer (`LLMClient._clean_triage`) before use — the category is allowlisted,
   the priority is constrained, confidence is clamped.
+
+---
+
+## Tool 1 — Triage Agent
+
+**The problem.** Inbound tickets arrive with wildly uneven detail. Technicians spend
+their first contact gathering basics — device, error message, what the user already tried
+— before any real work starts. Categorization and priority are applied inconsistently at
+intake, making routing, reporting, and trend analysis unreliable.
+
+**What it does.** Standardizes first contact: every ticket arrives pre-classified,
+pre-enriched with KB context, and accompanied by a drafted reply and a short list of the
+exact questions a technician needs answered — while keeping a human firmly in the loop.
+
+```bash
+python triage_agent.py --demo 3
+python triage_agent.py --text "VPN keeps dropping and I can't work"
+python triage_agent.py --ticket TS-1004
+```
+
+---
+
+## Tool 2 — Bulk Categorizer
+
+**The problem.** Over time, a large share of historical tickets end up under wrong,
+missing, or placeholder categories. The category field — the one used for reporting and
+routing — becomes unreliable, and fixing it by hand across thousands of tickets isn't a
+practical use of technician time.
+
+**What it does.** Reads a CSV of tickets and assigns a clean category to each via two
+stages: a free offline keyword pass resolves the obvious tickets, and only the ambiguous
+ones are sent to a model. A `--dry-run` mode shows what would change before writing.
+
+```bash
+python bulk_categorize.py --dry-run
+python bulk_categorize.py --out data/tickets_categorized.csv
+```
 
 ---
 
@@ -83,15 +130,9 @@ No dependencies are needed for the default (mock) provider — just Python 3.9+.
 # 1. Generate the synthetic tickets + mock knowledge base
 python data/generate_synthetic.py
 
-# 2. Triage a few tickets (proposal only)
+# 2. Run either tool (see the two sections above)
 python triage_agent.py --demo 3
-python triage_agent.py --text "VPN keeps dropping and I can't work"
-
-# 3. Clean up the backlog — see what would change without writing
 python bulk_categorize.py --dry-run
-
-# 4. Write the cleaned CSV
-python bulk_categorize.py --out data/tickets_categorized.csv
 ```
 
 See [`examples/sample_run.txt`](examples/sample_run.txt) for expected output.
@@ -120,12 +161,17 @@ helpdesk-triage-agent/
 ├── README.md
 ├── requirements.txt          # only needed for the anthropic provider
 ├── .env.example              # the LLM_PROVIDER swap point
-├── config.py                 # providers, taxonomy, paths — central config
-├── scoring.py                # deterministic keyword scorer (shared)
+│
+│   # --- shared core (both tools) ---
+├── config.py                 # providers, taxonomy, paths
+├── scoring.py                # deterministic keyword classifier
 ├── llm_client.py             # mock / ollama / anthropic behind one interface
-├── triage_agent.py           # core agent: retrieve KB -> propose -> human review
-├── bulk_categorize.py        # two-stage CSV backlog categorizer (dry-run capable)
 ├── prompts/                  # prompt templates used by the real providers
+│
+│   # --- the two tools ---
+├── triage_agent.py           # Tool 1: retrieve KB -> propose -> human review
+├── bulk_categorize.py        # Tool 2: two-stage CSV backlog categorizer
+│
 ├── data/
 │   ├── generate_synthetic.py # builds tickets.csv + kb/
 │   ├── tickets.csv           # ~300 synthetic tickets (generated)
@@ -142,6 +188,6 @@ helpdesk-triage-agent/
   The ground-truth column (`_seed_category`) exists only so the demo can report accuracy.
 - **Mock provider is a real implementation of the interface**, not a stub — it classifies
   with the shared keyword scorer and produces valid, structured proposals. That is what
-  lets the whole pipeline run with zero setup while still exercising the real control flow.
+  lets both tools run with zero setup while still exercising the real control flow.
 - The triage taxonomy and keyword cues live in `config.py`; edit them there to retarget
-  the system to a different environment.
+  the toolkit to a different environment.
