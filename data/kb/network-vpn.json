@@ -1,0 +1,9 @@
+{
+  "category": "Network / VPN",
+  "title": "Network / VPN: Tier-1 troubleshooting",
+  "steps": [
+    "Confirm on-site vs remote and Wi-Fi vs wired vs VPN.",
+    "Restart the network adapter and renew DHCP.",
+    "For VPN drops, check the client version and signal stability."
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "category": "Performance",
+  "title": "Performance: Tier-1 troubleshooting",
+  "steps": [
+    "Identify whether one app or the whole machine is slow.",
+    "Check CPU/memory and recent updates; restart.",
+    "Escalate for hardware diagnostics if it persists."
+  ]
+}

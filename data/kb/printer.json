@@ -1,0 +1,9 @@
+{
+  "category": "Printer",
+  "title": "Printer: Tier-1 troubleshooting",
+  "steps": [
+    "Identify the printer by name/location.",
+    "Clear the print queue and the physical jam.",
+    "Run a test print and scan to confirm both functions."
+  ]
+}

@@ -1,0 +1,7 @@
+# The default (mock) and local (ollama) providers use only the Python standard
+# library — no install required to run the demo.
+#
+# Install this only if you want to use the frontier (Anthropic) provider:
+#   pip install -r requirements.txt
+#   set LLM_PROVIDER=anthropic   (and set ANTHROPIC_API_KEY)
+anthropic>=0.40

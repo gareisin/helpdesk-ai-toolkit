@@ -1,0 +1,9 @@
+{
+  "category": "Phishing / Spam",
+  "title": "Phishing / Spam: Tier-1 troubleshooting",
+  "steps": [
+    "Do not click links or open attachments.",
+    "Have the user forward the message as an attachment.",
+    "Report to security and block the sender; check for other recipients."
+  ]
+}

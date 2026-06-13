@@ -1,0 +1,9 @@
+{
+  "category": "Software Install",
+  "title": "Software Install: Tier-1 troubleshooting",
+  "steps": [
+    "Verify the request is approved and a license is available.",
+    "Install from the managed software catalog.",
+    "Confirm activation and version after install."
+  ]
+}

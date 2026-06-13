@@ -1,0 +1,301 @@
+ticket_id,created,subject,body,current_category,_seed_category
+TS-1001,2026-03-17,Password expired,Forgot my password over the weekend and now I can't log in. Can you unlock account ruth?,Network / VPN,Password Reset
+TS-1002,2026-06-18,Can't print to the shared printer,The printer by the break room has a paper jam I can't clear. Print queue is stuck.,Printer,Printer
+TS-1003,2026-06-22,Suspicious email,Someone emailed asking for gift cards from the director's name. Looks like a scam.,,Phishing / Spam
+TS-1004,2026-01-19,Permission denied on folder,"My two-factor (MFA) prompt isn't arriving on my phone, so I can't get in.",,Account Access
+TS-1005,2026-04-24,Can't log in this morning,Forgot my password over the weekend and now I can't log in. Can you unlock account priya?,Password Reset,Password Reset
+TS-1006,2026-05-10,Not sure who to ask,"Not sure this is the right place, but I need help with something unusual.",Other,Other
+TS-1007,2026-02-01,General request,Quick question about how to request a new piece of equipment.,,Other
+TS-1008,2026-03-18,License activation failing,Can you install the latest version of our design application? I have an approved request.,,Software Install
+TS-1009,2026-03-09,Suspicious email,Someone emailed asking for gift cards from the director's name. Looks like a scam.,,Phishing / Spam
+TS-1010,2026-06-17,App keeps freezing,One application keeps freezing and I have to force-close it. Started this week.,,Performance
+TS-1011,2026-05-06,Suspicious email,This message looks like phishing — it's pretending to be from IT. Forwarding now.,,Phishing / Spam
+TS-1012,2026-05-15,App keeps freezing,One application keeps freezing and I have to force-close it. Started this week.,Software Install,Performance
+TS-1013,2026-01-09,Everything is lagging,Everything is lagging and the cursor spins constantly. Hard to get work done.,Performance,Performance
+TS-1014,2026-03-19,Permission denied on folder,I need access to the shared drive for my new project. What do you need from me?,,Account Access
+TS-1015,2026-05-21,Can't log in this morning,I'm locked out after a few bad attempts and need to get back in. No rush.,,Password Reset
+TS-1016,2026-03-22,Is this a scam?,I got a suspicious email with a link asking me to log in. I did not click it.,,Phishing / Spam
+TS-1017,2026-01-24,App keeps freezing,One application keeps freezing and I have to force-close it. Started this week.,,Performance
+TS-1018,2026-06-06,Computer is very slow,Everything is lagging and the cursor spins constantly. Hard to get work done.,,Performance
+TS-1019,2026-05-28,Second monitor dead,The second monitor on my docking station is black. Cable seems fine.,,Hardware
+TS-1020,2026-06-10,Outlook won't send,My mailbox stopped syncing on my phone this morning. Desktop is okay.,,Email
+TS-1021,2026-01-23,Suspicious email,This message looks like phishing — it's pretending to be from IT. Forwarding now.,Account Access,Phishing / Spam
+TS-1022,2026-02-22,Outlook won't send,My mailbox stopped syncing on my phone this morning. Desktop is okay.,Email,Email
+TS-1023,2026-01-22,Computer is very slow,Everything is lagging and the cursor spins constantly. Hard to get work done.,Performance,Performance
+TS-1024,2026-03-13,Suspicious email,Someone emailed asking for gift cards from the director's name. Looks like a scam.,Phishing / Spam,Phishing / Spam
+TS-1025,2026-05-25,Calendar invite issue,My mailbox stopped syncing on my phone this morning. Desktop is okay.,Email,Email
+TS-1026,2026-01-13,Keyboard not working,"A few keys on my keyboard stopped working. Started yesterday, getting worse.",,Hardware
+TS-1027,2026-04-21,Computer is very slow,Everything is lagging and the cursor spins constantly. Hard to get work done.,,Performance
+TS-1028,2026-05-28,Can't print to the shared printer,The scanner on the multifunction printer isn't responding when I try to scan.,,Printer
+TS-1029,2026-05-18,Not sure who to ask,Quick question about how to request a new piece of equipment.,,Other
+TS-1030,2026-01-07,Got a phishing message,Someone emailed asking for gift cards from the director's name. Looks like a scam.,,Phishing / Spam
+TS-1031,2026-06-13,Password expired,I tried logging in and it says my password expired. Can you reset it? My username is mira.,Password Reset,Password Reset
+TS-1032,2026-04-03,MFA not working,I need access to the shared drive for my new project. What do you need from me?,,Account Access
+TS-1033,2026-01-13,Calendar invite issue,My Outlook keeps showing 'cannot send' with an error. Inbox loads fine though.,,Email
+TS-1034,2026-04-27,App keeps freezing,One application keeps freezing and I have to force-close it. Started this week.,Performance,Performance
+TS-1035,2026-02-03,Locked out of my account,I'm locked out after a few bad attempts and need to get back in. No rush.,,Password Reset
+TS-1036,2026-01-17,Keyboard not working,"My laptop (asset LT-968) won't turn on at all this morning, even plugged in.",Hardware,Hardware
+TS-1037,2026-03-15,Laptop won't turn on,The second monitor on my docking station is black. Cable seems fine.,Hardware,Hardware
+TS-1038,2026-02-21,Second monitor dead,"My laptop (asset LT-238) won't turn on at all this morning, even plugged in.",,Hardware
+TS-1039,2026-04-10,Can't print to the shared printer,The scanner on the multifunction printer isn't responding when I try to scan.,Printer,Printer
+TS-1040,2026-04-04,General request,I had a general question about the new equipment policy — who should I talk to?,,Other
+TS-1041,2026-05-01,Computer is very slow,One application keeps freezing and I have to force-close it. Started this week.,Account Access,Performance
+TS-1042,2026-01-21,General request,"Not sure this is the right place, but I need help with something unusual.",,Other
+TS-1043,2026-04-27,Keyboard not working,"A few keys on my keyboard stopped working. Started yesterday, getting worse.",Hardware,Hardware
+TS-1044,2026-06-03,Can't connect to Wi-Fi,No internet at my desk since this morning — wired connection shows no network.,Network / VPN,Network / VPN
+TS-1045,2026-02-17,License activation failing,Can you install the latest version of our design application? I have an approved request.,,Software Install
+TS-1046,2026-04-18,General request,"Not sure this is the right place, but I need help with something unusual.",,Other
+TS-1047,2026-02-07,Can't print to the shared printer,The printer by the break room has a paper jam I can't clear. Print queue is stuck.,,Printer
+TS-1048,2026-04-08,Suspicious email,This message looks like phishing — it's pretending to be from IT. Forwarding now.,,Phishing / Spam
+TS-1049,2026-04-01,Got a phishing message,This message looks like phishing — it's pretending to be from IT. Forwarding now.,,Phishing / Spam
+TS-1050,2026-02-26,Permission denied on folder,I get 'permission denied' opening a folder I'm supposed to have access to.,,Account Access
+TS-1051,2026-03-01,Second monitor dead,"My laptop (asset LT-263) won't turn on at all this morning, even plugged in.",,Hardware
+TS-1052,2026-06-23,General request,"Not sure this is the right place, but I need help with something unusual.",Other,Other
+TS-1053,2026-02-22,Password expired,Forgot my password over the weekend and now I can't log in. Can you unlock account ian?,Password Reset,Password Reset
+TS-1054,2026-03-19,Second monitor dead,"A few keys on my keyboard stopped working. Started yesterday, getting worse.",Account Access,Hardware
+TS-1055,2026-04-03,Missing emails,My Outlook keeps showing 'cannot send' with an error. Inbox loads fine though.,Email,Email
+TS-1056,2026-05-25,Need access to shared drive,I get 'permission denied' opening a folder I'm supposed to have access to.,,Account Access
+TS-1057,2026-03-02,Calendar invite issue,My mailbox stopped syncing on my phone this morning. Desktop is okay.,,Email
+TS-1058,2026-04-06,Is this a scam?,I got a suspicious email with a link asking me to log in. I did not click it.,Phishing / Spam,Phishing / Spam
+TS-1059,2026-06-05,Not sure who to ask,"Not sure this is the right place, but I need help with something unusual.",Other,Other
+TS-1060,2026-06-14,Got a phishing message,This message looks like phishing — it's pretending to be from IT. Forwarding now.,,Phishing / Spam
+TS-1061,2026-04-14,Update won't apply,The license activation for my software keeps failing with an error code.,,Software Install
+TS-1062,2026-01-17,Can't print to the shared printer,The printer by the break room has a paper jam I can't clear. Print queue is stuck.,,Printer
+TS-1063,2026-01-03,Password expired,Forgot my password over the weekend and now I can't log in. Can you unlock account marcus?,,Password Reset
+TS-1064,2026-02-15,Not sure who to ask,Quick question about how to request a new piece of equipment.,Other,Other
+TS-1065,2026-05-21,Everything is lagging,Everything is lagging and the cursor spins constantly. Hard to get work done.,,Performance
+TS-1066,2026-01-24,License activation failing,The license activation for my software keeps failing with an error code.,Network / VPN,Software Install
+TS-1067,2026-01-17,Got a phishing message,This message looks like phishing — it's pretending to be from IT. Forwarding now.,Phishing / Spam,Phishing / Spam
+TS-1068,2026-03-13,Got a phishing message,This message looks like phishing — it's pretending to be from IT. Forwarding now.,,Phishing / Spam
+TS-1069,2026-06-13,Permission denied on folder,I get 'permission denied' opening a folder I'm supposed to have access to.,,Account Access
+TS-1070,2026-02-25,Need software installed,Can you install the latest version of our design application? I have an approved request.,Software Install,Software Install
+TS-1071,2026-04-17,Outlook won't send,My mailbox stopped syncing on my phone this morning. Desktop is okay.,,Email
+TS-1072,2026-04-10,App keeps freezing,Everything is lagging and the cursor spins constantly. Hard to get work done.,,Performance
+TS-1073,2026-05-04,Calendar invite issue,A calendar invite I sent isn't showing up for the recipients. Can you check?,,Email
+TS-1074,2026-04-15,Laptop won't turn on,The second monitor on my docking station is black. Cable seems fine.,,Hardware
+TS-1075,2026-06-28,Second monitor dead,"A few keys on my keyboard stopped working. Started yesterday, getting worse.",Hardware,Hardware
+TS-1076,2026-04-24,Permission denied on folder,I need access to the shared drive for my new project. What do you need from me?,,Account Access
+TS-1077,2026-03-02,Can't print to the shared printer,I can't print to the shared printer — jobs just sit in the queue.,,Printer
+TS-1078,2026-02-05,License activation failing,A required update won't apply — it downloads then rolls back every time.,Network / VPN,Software Install
+TS-1079,2026-04-18,No internet at my desk,No internet at my desk since this morning — wired connection shows no network.,,Network / VPN
+TS-1080,2026-03-20,Printer paper jam,The scanner on the multifunction printer isn't responding when I try to scan.,,Printer
+TS-1081,2026-03-03,Calendar invite issue,My mailbox stopped syncing on my phone this morning. Desktop is okay.,Software Install,Email
+TS-1082,2026-01-20,Question about policy,Quick question about how to request a new piece of equipment.,,Other
+TS-1083,2026-05-02,Is this a scam?,I got a suspicious email with a link asking me to log in. I did not click it.,,Phishing / Spam
+TS-1084,2026-03-26,Password expired,I tried logging in and it says my password expired. Can you reset it? My username is priya.,,Password Reset
+TS-1085,2026-03-12,Update won't apply,Can you install the latest version of our design application? I have an approved request.,,Software Install
+TS-1086,2026-06-13,Question about policy,Quick question about how to request a new piece of equipment.,,Other
+TS-1087,2026-06-05,VPN keeps disconnecting,"I can't connect to Wi-Fi on my laptop, but my phone connects fine.",,Network / VPN
+TS-1088,2026-01-08,Can't print to the shared printer,The scanner on the multifunction printer isn't responding when I try to scan.,,Printer
+TS-1089,2026-02-12,License activation failing,A required update won't apply — it downloads then rolls back every time.,,Software Install
+TS-1090,2026-03-14,MFA not working,I get 'permission denied' opening a folder I'm supposed to have access to.,,Account Access
+TS-1091,2026-06-11,Can't print to the shared printer,The scanner on the multifunction printer isn't responding when I try to scan.,,Printer
+TS-1092,2026-04-15,Need access to shared drive,I need access to the shared drive for my new project. What do you need from me?,,Account Access
+TS-1093,2026-05-27,App keeps freezing,One application keeps freezing and I have to force-close it. Started this week.,,Performance
+TS-1094,2026-02-20,Is this a scam?,Someone emailed asking for gift cards from the director's name. Looks like a scam.,Phishing / Spam,Phishing / Spam
+TS-1095,2026-01-16,No internet at my desk,No internet at my desk since this morning — wired connection shows no network.,Network / VPN,Network / VPN
+TS-1096,2026-02-07,Computer is very slow,Everything is lagging and the cursor spins constantly. Hard to get work done.,Performance,Performance
+TS-1097,2026-05-19,No internet at my desk,No internet at my desk since this morning — wired connection shows no network.,,Network / VPN
+TS-1098,2026-06-02,Scanner not working,I can't print to the shared printer — jobs just sit in the queue.,,Printer
+TS-1099,2026-05-20,Scanner not working,I can't print to the shared printer — jobs just sit in the queue.,Account Access,Printer
+TS-1100,2026-03-07,MFA not working,I get 'permission denied' opening a folder I'm supposed to have access to.,Printer,Account Access
+TS-1101,2026-04-13,Printer paper jam,The scanner on the multifunction printer isn't responding when I try to scan.,Printer,Printer
+TS-1102,2026-01-17,Calendar invite issue,A calendar invite I sent isn't showing up for the recipients. Can you check?,,Email
+TS-1103,2026-05-07,Suspicious email,This message looks like phishing — it's pretending to be from IT. Forwarding now.,,Phishing / Spam
+TS-1104,2026-01-23,Not sure who to ask,"Not sure this is the right place, but I need help with something unusual.",Other,Other
+TS-1105,2026-04-06,License activation failing,The license activation for my software keeps failing with an error code.,,Software Install
+TS-1106,2026-04-02,MFA not working,"My two-factor (MFA) prompt isn't arriving on my phone, so I can't get in.",Network / VPN,Account Access
+TS-1107,2026-04-05,Is this a scam?,This message looks like phishing — it's pretending to be from IT. Forwarding now.,,Phishing / Spam
+TS-1108,2026-06-27,License activation failing,A required update won't apply — it downloads then rolls back every time.,,Software Install
+TS-1109,2026-04-19,MFA not working,I get 'permission denied' opening a folder I'm supposed to have access to.,Hardware,Account Access
+TS-1110,2026-05-11,No internet at my desk,The VPN disconnects every few minutes while I'm working remote. Can't work like this.,,Network / VPN
+TS-1111,2026-03-08,Permission denied on folder,"My two-factor (MFA) prompt isn't arriving on my phone, so I can't get in.",Account Access,Account Access
+TS-1112,2026-03-08,MFA not working,I need access to the shared drive for my new project. What do you need from me?,,Account Access
+TS-1113,2026-05-05,Outlook won't send,A calendar invite I sent isn't showing up for the recipients. Can you check?,,Email
+TS-1114,2026-01-22,Not sure who to ask,"Not sure this is the right place, but I need help with something unusual.",,Other
+TS-1115,2026-02-25,Everything is lagging,One application keeps freezing and I have to force-close it. Started this week.,,Performance
+TS-1116,2026-06-10,No internet at my desk,"I can't connect to Wi-Fi on my laptop, but my phone connects fine.",,Network / VPN
+TS-1117,2026-06-12,Can't connect to Wi-Fi,The VPN disconnects every few minutes while I'm working remote. Can't work like this.,,Network / VPN
+TS-1118,2026-06-19,Suspicious email,Someone emailed asking for gift cards from the director's name. Looks like a scam.,Phishing / Spam,Phishing / Spam
+TS-1119,2026-06-20,Is this a scam?,Someone emailed asking for gift cards from the director's name. Looks like a scam.,Performance,Phishing / Spam
+TS-1120,2026-03-07,Update won't apply,A required update won't apply — it downloads then rolls back every time.,,Software Install
+TS-1121,2026-02-25,Printer paper jam,I can't print to the shared printer — jobs just sit in the queue.,,Printer
+TS-1122,2026-05-12,App keeps freezing,My whole machine is very slow and freezing since the last update. A restart helps briefly.,,Performance
+TS-1123,2026-01-08,Everything is lagging,My whole machine is very slow and freezing since the last update. A restart helps briefly.,Performance,Performance
+TS-1124,2026-01-18,Locked out of my account,I tried logging in and it says my password expired. Can you reset it? My username is beck.,,Password Reset
+TS-1125,2026-02-24,Need software installed,The license activation for my software keeps failing with an error code.,Account Access,Software Install
+TS-1126,2026-01-11,No internet at my desk,"I can't connect to Wi-Fi on my laptop, but my phone connects fine.",,Network / VPN
+TS-1127,2026-02-25,Update won't apply,The license activation for my software keeps failing with an error code.,,Software Install
+TS-1128,2026-02-08,App keeps freezing,Everything is lagging and the cursor spins constantly. Hard to get work done.,Performance,Performance
+TS-1129,2026-05-24,Can't connect to Wi-Fi,"I can't connect to Wi-Fi on my laptop, but my phone connects fine.",Performance,Network / VPN
+TS-1130,2026-04-01,Update won't apply,A required update won't apply — it downloads then rolls back every time.,,Software Install
+TS-1131,2026-05-15,Need software installed,The license activation for my software keeps failing with an error code.,Software Install,Software Install
+TS-1132,2026-05-03,MFA not working,"My two-factor (MFA) prompt isn't arriving on my phone, so I can't get in.",Account Access,Account Access
+TS-1133,2026-06-12,Keyboard not working,The second monitor on my docking station is black. Cable seems fine.,Software Install,Hardware
+TS-1134,2026-01-23,Need software installed,The license activation for my software keeps failing with an error code.,Phishing / Spam,Software Install
+TS-1135,2026-04-11,Password expired,I tried logging in and it says my password expired. Can you reset it? My username is sam.,Hardware,Password Reset
+TS-1136,2026-06-19,Not sure who to ask,Quick question about how to request a new piece of equipment.,,Other
+TS-1137,2026-04-28,Need software installed,A required update won't apply — it downloads then rolls back every time.,Software Install,Software Install
+TS-1138,2026-04-27,Keyboard not working,"My laptop (asset LT-524) won't turn on at all this morning, even plugged in.",,Hardware
+TS-1139,2026-03-01,MFA not working,"My two-factor (MFA) prompt isn't arriving on my phone, so I can't get in.",,Account Access
+TS-1140,2026-06-27,License activation failing,A required update won't apply — it downloads then rolls back every time.,,Software Install
+TS-1141,2026-01-14,Is this a scam?,I got a suspicious email with a link asking me to log in. I did not click it.,Phishing / Spam,Phishing / Spam
+TS-1142,2026-04-23,Locked out of my account,I'm locked out after a few bad attempts and need to get back in. No rush.,Hardware,Password Reset
+TS-1143,2026-06-04,Permission denied on folder,I need access to the shared drive for my new project. What do you need from me?,Password Reset,Account Access
+TS-1144,2026-04-09,Got a phishing message,I got a suspicious email with a link asking me to log in. I did not click it.,Phishing / Spam,Phishing / Spam
+TS-1145,2026-06-18,Permission denied on folder,I need access to the shared drive for my new project. What do you need from me?,Account Access,Account Access
+TS-1146,2026-03-06,Computer is very slow,Everything is lagging and the cursor spins constantly. Hard to get work done.,Performance,Performance
+TS-1147,2026-03-25,Need software installed,A required update won't apply — it downloads then rolls back every time.,Password Reset,Software Install
+TS-1148,2026-03-24,Need software installed,The license activation for my software keeps failing with an error code.,Software Install,Software Install
+TS-1149,2026-02-04,App keeps freezing,One application keeps freezing and I have to force-close it. Started this week.,,Performance
+TS-1150,2026-01-16,General request,Quick question about how to request a new piece of equipment.,,Other
+TS-1151,2026-05-22,Not sure who to ask,I had a general question about the new equipment policy — who should I talk to?,,Other
+TS-1152,2026-02-11,Got a phishing message,I got a suspicious email with a link asking me to log in. I did not click it.,Phishing / Spam,Phishing / Spam
+TS-1153,2026-04-13,Can't connect to Wi-Fi,The VPN disconnects every few minutes while I'm working remote. Can't work like this.,,Network / VPN
+TS-1154,2026-03-01,App keeps freezing,My whole machine is very slow and freezing since the last update. A restart helps briefly.,Other,Performance
+TS-1155,2026-06-15,Can't log in this morning,I'm locked out after a few bad attempts and need to get back in. No rush.,Password Reset,Password Reset
+TS-1156,2026-01-18,Laptop won't turn on,"My laptop (asset LT-607) won't turn on at all this morning, even plugged in.",Password Reset,Hardware
+TS-1157,2026-04-08,Calendar invite issue,A calendar invite I sent isn't showing up for the recipients. Can you check?,,Email
+TS-1158,2026-01-28,Need software installed,A required update won't apply — it downloads then rolls back every time.,,Software Install
+TS-1159,2026-02-10,Is this a scam?,This message looks like phishing — it's pretending to be from IT. Forwarding now.,,Phishing / Spam
+TS-1160,2026-01-25,Computer is very slow,My whole machine is very slow and freezing since the last update. A restart helps briefly.,,Performance
+TS-1161,2026-06-20,Outlook won't send,My Outlook keeps showing 'cannot send' with an error. Inbox loads fine though.,,Email
+TS-1162,2026-03-04,Everything is lagging,Everything is lagging and the cursor spins constantly. Hard to get work done.,Performance,Performance
+TS-1163,2026-06-03,Outlook won't send,My Outlook keeps showing 'cannot send' with an error. Inbox loads fine though.,,Email
+TS-1164,2026-03-17,App keeps freezing,Everything is lagging and the cursor spins constantly. Hard to get work done.,Printer,Performance
+TS-1165,2026-06-19,Permission denied on folder,I get 'permission denied' opening a folder I'm supposed to have access to.,Account Access,Account Access
+TS-1166,2026-03-24,Can't connect to Wi-Fi,The VPN disconnects every few minutes while I'm working remote. Can't work like this.,,Network / VPN
+TS-1167,2026-02-15,Keyboard not working,The second monitor on my docking station is black. Cable seems fine.,,Hardware
+TS-1168,2026-05-05,Second monitor dead,The second monitor on my docking station is black. Cable seems fine.,Email,Hardware
+TS-1169,2026-05-14,Locked out of my account,Forgot my password over the weekend and now I can't log in. Can you unlock account nadia?,Password Reset,Password Reset
+TS-1170,2026-06-06,Second monitor dead,"My laptop (asset LT-143) won't turn on at all this morning, even plugged in.",,Hardware
+TS-1171,2026-06-20,MFA not working,I need access to the shared drive for my new project. What do you need from me?,,Account Access
+TS-1172,2026-06-13,Scanner not working,I can't print to the shared printer — jobs just sit in the queue.,Printer,Printer
+TS-1173,2026-03-09,License activation failing,A required update won't apply — it downloads then rolls back every time.,,Software Install
+TS-1174,2026-06-04,Outlook won't send,A calendar invite I sent isn't showing up for the recipients. Can you check?,,Email
+TS-1175,2026-04-18,Locked out of my account,I'm locked out after a few bad attempts and need to get back in. No rush.,Password Reset,Password Reset
+TS-1176,2026-01-10,Missing emails,My Outlook keeps showing 'cannot send' with an error. Inbox loads fine though.,Email,Email
+TS-1177,2026-02-14,Missing emails,My Outlook keeps showing 'cannot send' with an error. Inbox loads fine though.,,Email
+TS-1178,2026-06-25,Scanner not working,The printer by the break room has a paper jam I can't clear. Print queue is stuck.,,Printer
+TS-1179,2026-06-09,Got a phishing message,Someone emailed asking for gift cards from the director's name. Looks like a scam.,,Phishing / Spam
+TS-1180,2026-02-10,General request,"Not sure this is the right place, but I need help with something unusual.",,Other
+TS-1181,2026-01-23,Can't print to the shared printer,The scanner on the multifunction printer isn't responding when I try to scan.,,Printer
+TS-1182,2026-02-16,Calendar invite issue,My mailbox stopped syncing on my phone this morning. Desktop is okay.,Printer,Email
+TS-1183,2026-05-22,License activation failing,The license activation for my software keeps failing with an error code.,,Software Install
+TS-1184,2026-02-16,Missing emails,My mailbox stopped syncing on my phone this morning. Desktop is okay.,,Email
+TS-1185,2026-06-22,Second monitor dead,"A few keys on my keyboard stopped working. Started yesterday, getting worse.",Hardware,Hardware
+TS-1186,2026-01-04,Can't log in this morning,Forgot my password over the weekend and now I can't log in. Can you unlock account ruth?,Password Reset,Password Reset
+TS-1187,2026-02-26,Password expired,I'm locked out after a few bad attempts and need to get back in. No rush.,Password Reset,Password Reset
+TS-1188,2026-04-28,License activation failing,The license activation for my software keeps failing with an error code.,Printer,Software Install
+TS-1189,2026-06-06,Password expired,Forgot my password over the weekend and now I can't log in. Can you unlock account ruth?,Printer,Password Reset
+TS-1190,2026-04-27,Need access to shared drive,I get 'permission denied' opening a folder I'm supposed to have access to.,Printer,Account Access
+TS-1191,2026-04-26,Got a phishing message,Someone emailed asking for gift cards from the director's name. Looks like a scam.,,Phishing / Spam
+TS-1192,2026-06-07,License activation failing,Can you install the latest version of our design application? I have an approved request.,,Software Install
+TS-1193,2026-02-13,Not sure who to ask,"Not sure this is the right place, but I need help with something unusual.",,Other
+TS-1194,2026-06-25,Scanner not working,I can't print to the shared printer — jobs just sit in the queue.,,Printer
+TS-1195,2026-05-14,Question about policy,"Not sure this is the right place, but I need help with something unusual.",Hardware,Other
+TS-1196,2026-06-11,General request,Quick question about how to request a new piece of equipment.,,Other
+TS-1197,2026-05-21,Can't connect to Wi-Fi,"I can't connect to Wi-Fi on my laptop, but my phone connects fine.",,Network / VPN
+TS-1198,2026-02-23,MFA not working,"My two-factor (MFA) prompt isn't arriving on my phone, so I can't get in.",,Account Access
+TS-1199,2026-06-09,Need access to shared drive,I need access to the shared drive for my new project. What do you need from me?,Account Access,Account Access
+TS-1200,2026-03-16,Second monitor dead,The second monitor on my docking station is black. Cable seems fine.,,Hardware
+TS-1201,2026-02-10,Laptop won't turn on,"My laptop (asset LT-404) won't turn on at all this morning, even plugged in.",,Hardware
+TS-1202,2026-02-13,General request,"Not sure this is the right place, but I need help with something unusual.",,Other
+TS-1203,2026-04-21,Can't print to the shared printer,The scanner on the multifunction printer isn't responding when I try to scan.,,Printer
+TS-1204,2026-01-14,Can't connect to Wi-Fi,No internet at my desk since this morning — wired connection shows no network.,Network / VPN,Network / VPN
+TS-1205,2026-02-05,Locked out of my account,I'm locked out after a few bad attempts and need to get back in. No rush.,,Password Reset
+TS-1206,2026-03-23,Can't log in this morning,Forgot my password over the weekend and now I can't log in. Can you unlock account mira?,Software Install,Password Reset
+TS-1207,2026-04-06,Scanner not working,The printer by the break room has a paper jam I can't clear. Print queue is stuck.,Printer,Printer
+TS-1208,2026-04-04,Need access to shared drive,"My two-factor (MFA) prompt isn't arriving on my phone, so I can't get in.",Account Access,Account Access
+TS-1209,2026-01-22,No internet at my desk,"I can't connect to Wi-Fi on my laptop, but my phone connects fine.",Network / VPN,Network / VPN
+TS-1210,2026-06-14,No internet at my desk,No internet at my desk since this morning — wired connection shows no network.,,Network / VPN
+TS-1211,2026-04-12,App keeps freezing,One application keeps freezing and I have to force-close it. Started this week.,,Performance
+TS-1212,2026-02-07,VPN keeps disconnecting,The VPN disconnects every few minutes while I'm working remote. Can't work like this.,,Network / VPN
+TS-1213,2026-02-02,MFA not working,I get 'permission denied' opening a folder I'm supposed to have access to.,Account Access,Account Access
+TS-1214,2026-02-15,Missing emails,My Outlook keeps showing 'cannot send' with an error. Inbox loads fine though.,,Email
+TS-1215,2026-03-09,Calendar invite issue,A calendar invite I sent isn't showing up for the recipients. Can you check?,Email,Email
+TS-1216,2026-03-22,Got a phishing message,I got a suspicious email with a link asking me to log in. I did not click it.,,Phishing / Spam
+TS-1217,2026-01-26,Question about policy,Quick question about how to request a new piece of equipment.,,Other
+TS-1218,2026-03-26,Calendar invite issue,My Outlook keeps showing 'cannot send' with an error. Inbox loads fine though.,,Email
+TS-1219,2026-04-16,Laptop won't turn on,"A few keys on my keyboard stopped working. Started yesterday, getting worse.",Password Reset,Hardware
+TS-1220,2026-03-11,Password expired,I tried logging in and it says my password expired. Can you reset it? My username is lena.,Password Reset,Password Reset
+TS-1221,2026-03-01,No internet at my desk,No internet at my desk since this morning — wired connection shows no network.,Network / VPN,Network / VPN
+TS-1222,2026-01-03,Calendar invite issue,My mailbox stopped syncing on my phone this morning. Desktop is okay.,,Email
+TS-1223,2026-05-10,Need software installed,The license activation for my software keeps failing with an error code.,,Software Install
+TS-1224,2026-01-07,Got a phishing message,This message looks like phishing — it's pretending to be from IT. Forwarding now.,,Phishing / Spam
+TS-1225,2026-04-17,Locked out of my account,I tried logging in and it says my password expired. Can you reset it? My username is jordan.,,Password Reset
+TS-1226,2026-03-26,Can't log in this morning,I tried logging in and it says my password expired. Can you reset it? My username is lena.,,Password Reset
+TS-1227,2026-03-18,Is this a scam?,This message looks like phishing — it's pretending to be from IT. Forwarding now.,Phishing / Spam,Phishing / Spam
+TS-1228,2026-02-28,Missing emails,A calendar invite I sent isn't showing up for the recipients. Can you check?,Email,Email
+TS-1229,2026-03-20,Got a phishing message,Someone emailed asking for gift cards from the director's name. Looks like a scam.,,Phishing / Spam
+TS-1230,2026-03-17,Permission denied on folder,"My two-factor (MFA) prompt isn't arriving on my phone, so I can't get in.",Account Access,Account Access
+TS-1231,2026-02-11,No internet at my desk,"I can't connect to Wi-Fi on my laptop, but my phone connects fine.",Network / VPN,Network / VPN
+TS-1232,2026-03-18,Second monitor dead,"My laptop (asset LT-635) won't turn on at all this morning, even plugged in.",,Hardware
+TS-1233,2026-04-07,Need software installed,Can you install the latest version of our design application? I have an approved request.,,Software Install
+TS-1234,2026-02-05,Permission denied on folder,I get 'permission denied' opening a folder I'm supposed to have access to.,,Account Access
+TS-1235,2026-02-13,Update won't apply,A required update won't apply — it downloads then rolls back every time.,,Software Install
+TS-1236,2026-05-05,General request,Quick question about how to request a new piece of equipment.,Other,Other
+TS-1237,2026-06-16,General request,"Not sure this is the right place, but I need help with something unusual.",,Other
+TS-1238,2026-01-21,Is this a scam?,Someone emailed asking for gift cards from the director's name. Looks like a scam.,Hardware,Phishing / Spam
+TS-1239,2026-02-05,VPN keeps disconnecting,"I can't connect to Wi-Fi on my laptop, but my phone connects fine.",Network / VPN,Network / VPN
+TS-1240,2026-03-19,Suspicious email,This message looks like phishing — it's pretending to be from IT. Forwarding now.,,Phishing / Spam
+TS-1241,2026-03-16,Computer is very slow,Everything is lagging and the cursor spins constantly. Hard to get work done.,,Performance
+TS-1242,2026-04-03,Keyboard not working,"A few keys on my keyboard stopped working. Started yesterday, getting worse.",,Hardware
+TS-1243,2026-02-15,Update won't apply,The license activation for my software keeps failing with an error code.,Printer,Software Install
+TS-1244,2026-04-18,Need access to shared drive,"My two-factor (MFA) prompt isn't arriving on my phone, so I can't get in.",Software Install,Account Access
+TS-1245,2026-02-15,Can't print to the shared printer,The printer by the break room has a paper jam I can't clear. Print queue is stuck.,Printer,Printer
+TS-1246,2026-04-17,Can't log in this morning,I'm locked out after a few bad attempts and need to get back in. No rush.,,Password Reset
+TS-1247,2026-02-26,Suspicious email,I got a suspicious email with a link asking me to log in. I did not click it.,,Phishing / Spam
+TS-1248,2026-06-23,App keeps freezing,One application keeps freezing and I have to force-close it. Started this week.,Performance,Performance
+TS-1249,2026-02-09,Computer is very slow,One application keeps freezing and I have to force-close it. Started this week.,,Performance
+TS-1250,2026-01-10,Scanner not working,The printer by the break room has a paper jam I can't clear. Print queue is stuck.,,Printer
+TS-1251,2026-05-18,Printer paper jam,I can't print to the shared printer — jobs just sit in the queue.,,Printer
+TS-1252,2026-03-14,Not sure who to ask,I had a general question about the new equipment policy — who should I talk to?,,Other
+TS-1253,2026-04-12,Password expired,I tried logging in and it says my password expired. Can you reset it? My username is jordan.,,Password Reset
+TS-1254,2026-01-24,No internet at my desk,"I can't connect to Wi-Fi on my laptop, but my phone connects fine.",,Network / VPN
+TS-1255,2026-05-17,Need access to shared drive,I need access to the shared drive for my new project. What do you need from me?,,Account Access
+TS-1256,2026-02-10,License activation failing,A required update won't apply — it downloads then rolls back every time.,,Software Install
+TS-1257,2026-06-09,Can't print to the shared printer,The scanner on the multifunction printer isn't responding when I try to scan.,,Printer
+TS-1258,2026-06-08,Question about policy,I had a general question about the new equipment policy — who should I talk to?,,Other
+TS-1259,2026-02-25,Keyboard not working,"A few keys on my keyboard stopped working. Started yesterday, getting worse.",Hardware,Hardware
+TS-1260,2026-04-19,Need access to shared drive,I need access to the shared drive for my new project. What do you need from me?,,Account Access
+TS-1261,2026-04-17,Update won't apply,A required update won't apply — it downloads then rolls back every time.,Software Install,Software Install
+TS-1262,2026-06-23,License activation failing,A required update won't apply — it downloads then rolls back every time.,Software Install,Software Install
+TS-1263,2026-05-02,MFA not working,I need access to the shared drive for my new project. What do you need from me?,,Account Access
+TS-1264,2026-06-17,Computer is very slow,One application keeps freezing and I have to force-close it. Started this week.,,Performance
+TS-1265,2026-03-15,Computer is very slow,One application keeps freezing and I have to force-close it. Started this week.,Performance,Performance
+TS-1266,2026-03-15,Is this a scam?,Someone emailed asking for gift cards from the director's name. Looks like a scam.,,Phishing / Spam
+TS-1267,2026-05-20,General request,I had a general question about the new equipment policy — who should I talk to?,,Other
+TS-1268,2026-01-27,Got a phishing message,Someone emailed asking for gift cards from the director's name. Looks like a scam.,Password Reset,Phishing / Spam
+TS-1269,2026-01-07,VPN keeps disconnecting,The VPN disconnects every few minutes while I'm working remote. Can't work like this.,Network / VPN,Network / VPN
+TS-1270,2026-02-17,Question about policy,"Not sure this is the right place, but I need help with something unusual.",,Other
+TS-1271,2026-01-11,Laptop won't turn on,"My laptop (asset LT-638) won't turn on at all this morning, even plugged in.",Hardware,Hardware
+TS-1272,2026-06-09,Laptop won't turn on,The second monitor on my docking station is black. Cable seems fine.,,Hardware
+TS-1273,2026-04-01,Need software installed,A required update won't apply — it downloads then rolls back every time.,Software Install,Software Install
+TS-1274,2026-02-28,Computer is very slow,Everything is lagging and the cursor spins constantly. Hard to get work done.,,Performance
+TS-1275,2026-06-02,Permission denied on folder,"My two-factor (MFA) prompt isn't arriving on my phone, so I can't get in.",,Account Access
+TS-1276,2026-06-12,Everything is lagging,Everything is lagging and the cursor spins constantly. Hard to get work done.,,Performance
+TS-1277,2026-04-02,Locked out of my account,I tried logging in and it says my password expired. Can you reset it? My username is marcus.,,Password Reset
+TS-1278,2026-05-09,MFA not working,"My two-factor (MFA) prompt isn't arriving on my phone, so I can't get in.",,Account Access
+TS-1279,2026-01-08,Need access to shared drive,I get 'permission denied' opening a folder I'm supposed to have access to.,,Account Access
+TS-1280,2026-02-04,Laptop won't turn on,"My laptop (asset LT-494) won't turn on at all this morning, even plugged in.",,Hardware
+TS-1281,2026-05-03,Got a phishing message,Someone emailed asking for gift cards from the director's name. Looks like a scam.,Phishing / Spam,Phishing / Spam
+TS-1282,2026-05-19,Can't print to the shared printer,The printer by the break room has a paper jam I can't clear. Print queue is stuck.,Email,Printer
+TS-1283,2026-03-10,No internet at my desk,No internet at my desk since this morning — wired connection shows no network.,,Network / VPN
+TS-1284,2026-04-06,Everything is lagging,My whole machine is very slow and freezing since the last update. A restart helps briefly.,,Performance
+TS-1285,2026-05-19,Need software installed,A required update won't apply — it downloads then rolls back every time.,,Software Install
+TS-1286,2026-03-27,Update won't apply,A required update won't apply — it downloads then rolls back every time.,Software Install,Software Install
+TS-1287,2026-05-10,Computer is very slow,One application keeps freezing and I have to force-close it. Started this week.,,Performance
+TS-1288,2026-01-17,Question about policy,I had a general question about the new equipment policy — who should I talk to?,Account Access,Other
+TS-1289,2026-03-10,Got a phishing message,This message looks like phishing — it's pretending to be from IT. Forwarding now.,Password Reset,Phishing / Spam
+TS-1290,2026-03-28,Laptop won't turn on,The second monitor on my docking station is black. Cable seems fine.,,Hardware
+TS-1291,2026-02-12,Permission denied on folder,"My two-factor (MFA) prompt isn't arriving on my phone, so I can't get in.",,Account Access
+TS-1292,2026-02-20,Missing emails,My mailbox stopped syncing on my phone this morning. Desktop is okay.,,Email
+TS-1293,2026-02-03,Keyboard not working,"My laptop (asset LT-975) won't turn on at all this morning, even plugged in.",Hardware,Hardware
+TS-1294,2026-06-17,No internet at my desk,"I can't connect to Wi-Fi on my laptop, but my phone connects fine.",,Network / VPN
+TS-1295,2026-05-10,Printer paper jam,I can't print to the shared printer — jobs just sit in the queue.,,Printer
+TS-1296,2026-02-24,Second monitor dead,"My laptop (asset LT-379) won't turn on at all this morning, even plugged in.",,Hardware
+TS-1297,2026-06-17,Not sure who to ask,I had a general question about the new equipment policy — who should I talk to?,,Other
+TS-1298,2026-02-02,VPN keeps disconnecting,"I can't connect to Wi-Fi on my laptop, but my phone connects fine.",Network / VPN,Network / VPN
+TS-1299,2026-01-02,Keyboard not working,The second monitor on my docking station is black. Cable seems fine.,,Hardware
+TS-1300,2026-04-24,Can't connect to Wi-Fi,No internet at my desk since this morning — wired connection shows no network.,,Network / VPN

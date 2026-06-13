@@ -1,0 +1,9 @@
+{
+  "category": "Account Access",
+  "title": "Account Access: Tier-1 troubleshooting",
+  "steps": [
+    "Confirm the resource and the expected access level.",
+    "Verify group membership and request approval if needed.",
+    "For MFA, re-register the device or push a new prompt."
+  ]
+}

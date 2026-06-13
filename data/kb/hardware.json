@@ -1,0 +1,9 @@
+{
+  "category": "Hardware",
+  "title": "Hardware: Tier-1 troubleshooting",
+  "steps": [
+    "Confirm power and try a different outlet/cable.",
+    "For docking issues, reseat the dock and test ports directly.",
+    "Log the asset tag and arrange a loaner if needed."
+  ]
+}

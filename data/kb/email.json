@@ -1,0 +1,9 @@
+{
+  "category": "Email",
+  "title": "Email: Tier-1 troubleshooting",
+  "steps": [
+    "Confirm whether the issue is desktop, web, or mobile.",
+    "Check mailbox quota and connection status.",
+    "Recreate the mail profile if sync is broken."
+  ]
+}

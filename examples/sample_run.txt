@@ -1,0 +1,37 @@
+$ python triage_agent.py --text "VPN keeps dropping every few minutes and I cant work"
+
+[provider: mock]
+
+======================================================================
+VPN keeps dropping every few minutes and I cant work
+----------------------------------------------------------------------
+  category    : Network / VPN
+  priority    : high
+  confidence  : 0.7
+  kb context  : yes
+  missing info:
+     - Are you on-site or remote?
+     - Does it affect Wi-Fi, wired, or VPN specifically?
+  draft reply :
+     Thanks for reaching out. This looks like a Network / VPN issue. Based on our knowledge base (Network / VPN: Tier-1 troubleshooting), please try the steps below while we confirm a few details. If they don't resolve it, a technician will follow up.
+  >> PROPOSAL ONLY - awaiting technician review. No action taken.
+======================================================================
+
+$ python bulk_categorize.py --dry-run
+
+[provider: mock]  categorizing 300 tickets...
+
+  stage 1 (keyword, free) : 253
+  stage 2 (llm fallback)  : 47
+  category changed        : 224 / 300
+  accuracy vs synthetic ground truth : 283/300 (94.3%)
+
+  -- dry run: no file written. Sample of proposed changes --
+   TS-1001: Network / VPN      -> Password Reset     [keyword]
+   TS-1002: Printer            -> Printer            [keyword]
+   TS-1003: (none)             -> Phishing / Spam    [keyword]
+   TS-1004: (none)             -> Account Access     [keyword]
+   TS-1005: Password Reset     -> Password Reset     [keyword]
+   TS-1006: Other              -> Other              [llm:mock]
+   TS-1007: (none)             -> Other              [llm:mock]
+   TS-1008: (none)             -> Software Install   [keyword]
