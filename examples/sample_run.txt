@@ -1,21 +1,43 @@
-$ python triage_agent.py --text "VPN keeps dropping every few minutes and I cant work"
+$ python support_agent.py --demo
 
 [provider: mock]
 
-======================================================================
-VPN keeps dropping every few minutes and I cant work
-----------------------------------------------------------------------
-  category    : Network / VPN
-  priority    : high
-  confidence  : 0.7
-  kb context  : yes
-  missing info:
-     - Are you on-site or remote?
-     - Does it affect Wi-Fi, wired, or VPN specifically?
-  draft reply :
-     Thanks for reaching out. This looks like a Network / VPN issue. Based on our knowledge base (Network / VPN: Tier-1 troubleshooting), please try the steps below while we confirm a few details. If they don't resolve it, a technician will follow up.
-  >> PROPOSAL ONLY - awaiting technician review. No action taken.
-======================================================================
+========================================================================
+SCENARIO: Self-service (canned, no model call)
+========================================================================
+user> Subject: Password expired | I forgot my password and need to reset it.
+--- routing: Password Reset (confidence 0.8500000000000001) -> canned self-service (no model call) ---
+agent> You can reset your own password in under a minute: go to the company sign-in page, click "Forgot password," and follow the verification prompts. If you're fully locked out, reply here and we'll unlock the account.
+>> OUTCOME: resolved via self-service  (no ticket created)
+
+========================================================================
+SCENARIO: Resolved through conversation
+========================================================================
+user> Subject: Software install failing | I need our design app installed and the installer keeps failing with an error.
+--- routing: Software Install (confidence 0.8500000000000001) -> conversational agent ---
+agent> Thanks for the details - let's start here: Verify the request is approved and a license is available. Did that help? If not, tell me what happened.
+user> I have an approved request, ticket #4412.
+agent> Okay. Next, try this: Install from the managed software catalog. Let me know if that resolves it.
+user> That worked, thanks!
+agent> Glad that resolved it - I'll close this out. If it comes back, just reply here and I'll reopen it.
+>> OUTCOME: resolved through conversation  (no ticket created)
+
+========================================================================
+SCENARIO: Escalated to a technician
+========================================================================
+user> Subject: Laptop won't power on | My laptop won't turn on at all this morning, even plugged in.
+--- routing: Hardware (confidence 0.8500000000000001) -> conversational agent ---
+agent> Thanks for the details - let's start here: Confirm power and try a different outlet/cable. Did that help? If not, tell me what happened.
+user> Tried a different outlet, still nothing.
+agent> Okay. Next, try this: For docking issues, reseat the dock and test ports directly. Let me know if that resolves it.
+user> Held the power button 30 seconds, no change.
+agent> Okay. Next, try this: Log the asset tag and arrange a loaner if needed. Let me know if that resolves it.
+user> Still completely dead.
+agent> I've run through the standard steps without luck. I'll escalate this to a technician with everything we've covered so far.
+agent> I've escalated this to a technician with the full history - someone will follow up shortly.
+>> OUTCOME: escalated -> ticket DEMO-003 created (category=Hardware, priority=medium)
+   routed to the help desk queue: data\queue\DEMO-003.json
+
 
 $ python bulk_categorize.py --dry-run
 

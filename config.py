@@ -76,7 +76,7 @@ CATEGORIES = {
 
 CATEGORY_NAMES = list(CATEGORIES.keys())
 
-# Keyword cues for priority — used only by the mock provider. Real models infer
+# Keyword cues for priority — used by the deterministic provider. Real models infer
 # priority from the full ticket text.
 PRIORITY_CUES = {
     "urgent": ["whole office", "everyone", "production down", "all users",
@@ -86,11 +86,50 @@ PRIORITY_CUES = {
     "low": ["whenever", "no rush", "low priority", "when you get a chance"],
 }
 
+# --- Resolution-agent behavior --------------------------------------------
+
+# Stage-1 routing: a ticket that classifies at or above this confidence AND has a
+# canned self-service answer is resolved without ever calling the model. Below it,
+# the conversational LLM path takes over. This is the cost/latency lever — routine
+# tickets never touch the model.
+CANNED_CONFIDENCE = 0.75
+
+# How many back-and-forth turns the agent attempts with the user before it gives
+# up on self-service and escalates to a human-handled ticket.
+MAX_TURNS = 4
+
+# Canned, KB-backed self-service answers for the most routine categories. A ticket
+# that routes to one of these is handled at zero model cost. Categories without an
+# entry always go to the conversational LLM path.
+CANNED_RESPONSES = {
+    "Password Reset": (
+        "You can reset your own password in under a minute: go to the company "
+        "sign-in page, click \"Forgot password,\" and follow the verification "
+        "prompts. If you're fully locked out, reply here and we'll unlock the account."
+    ),
+    "Network / VPN": (
+        "Most Wi-Fi/VPN drops clear with a quick reset: toggle Wi-Fi off and on, "
+        "forget and rejoin the network, then reconnect the VPN client. If you're on "
+        "wired, reseat the cable. Reply if it's still down after that."
+    ),
+    "Printer": (
+        "For a stuck print job: open your print queue, cancel all jobs, then clear "
+        "any physical paper jam and power-cycle the printer. Send a test page once "
+        "it's back. Reply if it still won't print or scan."
+    ),
+    "Performance": (
+        "If the machine is slow or frozen, save your work and restart — it clears "
+        "most temporary slowdowns. If one specific app is the problem, close and "
+        "reopen just that app first. Reply if it's still sluggish after a restart."
+    ),
+}
+
 # --- Paths ----------------------------------------------------------------
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(ROOT, "data")
 KB_DIR = os.path.join(DATA_DIR, "kb")
+QUEUE_DIR = os.path.join(DATA_DIR, "queue")   # escalated tickets land here
 TICKETS_CSV = os.path.join(DATA_DIR, "tickets.csv")
 PROMPTS_DIR = os.path.join(ROOT, "prompts")
 EXAMPLES_DIR = os.path.join(ROOT, "examples")

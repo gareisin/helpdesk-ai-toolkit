@@ -9,3 +9,6 @@ venv/
 
 # Generated categorizer output (regenerate with bulk_categorize.py)
 data/tickets_categorized.csv
+
+# Escalated tickets written by the support agent at runtime
+data/queue/

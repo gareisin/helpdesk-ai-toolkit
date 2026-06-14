@@ -6,131 +6,102 @@ One interface, three implementations, selected by config.LLM_PROVIDER:
     OllamaClient     local open-source model over HTTP (cheap runtime tier)
     AnthropicClient  frontier Claude model (architect tier)
 
-The interface is deliberately *domain-aware* rather than a thin `complete(text)`
-wrapper. The two methods below are the only things the rest of the codebase calls:
+The interface is domain-aware. Two methods are all the rest of the codebase calls:
 
-    triage(ticket_text, kb_context)   -> structured triage proposal
-    categorize(summary)               -> single-label classification
+    respond(conversation, kb_context)  -> the agent's next turn in a support chat
+    categorize(summary)                -> single-label classification (bulk tool)
 
-Because the contract is fixed, swapping providers changes cost and where data
-goes — not the calling code. That is the hybrid architecture made concrete.
+`respond` drives the conversational Tier-1 agent: given the conversation so far and
+retrieved knowledge-base context, it returns the agent's next message to the user plus
+a status that tells the agent loop whether the issue is resolved, still in progress, or
+should be escalated to a human. Swapping providers changes cost and where data goes —
+never the calling code.
 """
 
 import json
 import os
 
 import config
-from scoring import classify, score_categories
+from scoring import classify
 
-# Reusable description of the JSON contract both real providers must satisfy.
-_TRIAGE_KEYS = "category, priority, confidence, missing_info, draft_reply"
-_PRIORITIES = "low | medium | high | urgent"
+VALID_STATUS = ("in_progress", "resolved", "escalate")
 
+# Phrases that signal the user's problem is fixed (used by the deterministic
+# provider; the real models infer resolution from the conversation).
+_RESOLVED_SIGNALS = (
+    "worked", "that fixed", "fixed it", "resolved", "did it", "all set",
+    "all good", "thanks", "thank you", "that did it", "no longer", "back up",
+)
 
-# --------------------------------------------------------------------------
-# Base class
-# --------------------------------------------------------------------------
 
 class LLMClient:
     name = "base"
 
-    def triage(self, ticket_text: str, kb_context: str) -> dict:
+    def respond(self, conversation: list, kb_context: str) -> dict:
         raise NotImplementedError
 
     def categorize(self, summary: str) -> dict:
         raise NotImplementedError
 
-    # Shared validation so a malformed model response can't poison downstream
-    # steps. Model output is untrusted data — coerce it into a known shape.
-    def _clean_triage(self, raw: dict) -> dict:
-        cat = raw.get("category")
-        if cat not in config.CATEGORY_NAMES:
-            cat = "Other"
-        pri = str(raw.get("priority", "medium")).lower()
-        if pri not in ("low", "medium", "high", "urgent"):
-            pri = "medium"
-        try:
-            conf = float(raw.get("confidence", 0.5))
-        except (TypeError, ValueError):
-            conf = 0.5
-        conf = max(0.0, min(1.0, conf))
-        missing = raw.get("missing_info") or []
-        if not isinstance(missing, list):
-            missing = [str(missing)]
-        draft = str(raw.get("draft_reply", "")).strip()
-        return {
-            "category": cat,
-            "priority": pri,
-            "confidence": round(conf, 2),
-            "missing_info": [str(m) for m in missing][:6],
-            "draft_reply": draft,
-        }
+    # Model output is data, not a command — coerce it into a known shape before
+    # the agent loop acts on it.
+    def _clean_turn(self, raw: dict) -> dict:
+        message = str(raw.get("message", "")).strip()
+        status = str(raw.get("status", "in_progress")).lower()
+        if status not in VALID_STATUS:
+            status = "in_progress"
+        if not message:
+            message = "Could you tell me a bit more about what you're seeing?"
+        return {"message": message, "status": status}
 
 
 # --------------------------------------------------------------------------
 # Mock — deterministic, offline. The default.
 # --------------------------------------------------------------------------
 
-# Per-category follow-up questions the mock asks to reach "minimum viable info".
-_MISSING_INFO = {
-    "Password Reset": ["What is the username or email on the affected account?",
-                       "Are you fully locked out, or just need a reset?"],
-    "Email": ["What is the exact error message, if any?",
-              "Does this affect Outlook desktop, web, or mobile?"],
-    "Hardware": ["What is the device asset tag or serial number?",
-                 "When did the issue start, and is it constant or intermittent?"],
-    "Network / VPN": ["Are you on-site or remote?",
-                      "Does it affect Wi-Fi, wired, or VPN specifically?"],
-    "Software Install": ["What is the exact application name and version?",
-                         "Do you have an approved license or request ticket?"],
-    "Printer": ["Which printer (name or location)?",
-                "Is it failing to print, scan, or both?"],
-    "Account Access": ["What system or resource are you trying to access?",
-                       "What access level do you expect to have?"],
-    "Phishing / Spam": ["Did you click any link or open any attachment?",
-                        "Please forward the message as an attachment — do not delete it."],
-    "Performance": ["Which application is slow, or is it the whole machine?",
-                    "When did it start, and does a restart help temporarily?"],
-    "Other": ["Can you describe the issue in a bit more detail?",
-              "What outcome are you hoping for?"],
-}
-
-
 class MockClient(LLMClient):
     name = "mock"
 
-    def _priority(self, text: str, category: str) -> str:
-        low = text.lower()
-        for level in ("urgent", "high", "low"):
-            if any(cue in low for cue in config.PRIORITY_CUES[level]):
-                return level
-        # Security categories default up; everything else is medium.
-        if category == "Phishing / Spam":
-            return "high"
-        return "medium"
+    @staticmethod
+    def _kb_steps(kb_context: str) -> list:
+        """Pull the bulleted troubleshooting steps out of retrieved KB text."""
+        steps = []
+        for line in (kb_context or "").splitlines():
+            line = line.strip()
+            if line.startswith("- "):
+                steps.append(line[2:].strip())
+        return steps
 
-    def triage(self, ticket_text: str, kb_context: str) -> dict:
-        category, confidence, _ = classify(ticket_text)
-        priority = self._priority(ticket_text, category)
-        first_kb_line = (kb_context.strip().splitlines() or [""])[0].lstrip("# ").strip()
-        if first_kb_line:
-            draft = (
-                f"Thanks for reaching out. This looks like a {category} issue. "
-                f"Based on our knowledge base ({first_kb_line}), please try the steps "
-                f"below while we confirm a few details. If they don't resolve it, "
-                f"a technician will follow up."
-            )
-        else:
-            draft = (
-                f"Thanks for reaching out. This looks like a {category} issue. "
-                f"A technician will follow up once we confirm a few details."
-            )
-        return self._clean_triage({
-            "category": category,
-            "priority": priority,
-            "confidence": confidence,
-            "missing_info": _MISSING_INFO.get(category, _MISSING_INFO["Other"]),
-            "draft_reply": draft,
+    def respond(self, conversation: list, kb_context: str) -> dict:
+        user_msgs = [m for m in conversation if m["role"] == "user"]
+        last_user = user_msgs[-1]["text"].lower() if user_msgs else ""
+
+        # 1) Did the user just tell us it's fixed?
+        if len(user_msgs) > 1 and any(sig in last_user for sig in _RESOLVED_SIGNALS):
+            return self._clean_turn({
+                "message": "Glad that resolved it - I'll close this out. "
+                           "If it comes back, just reply here and I'll reopen it.",
+                "status": "resolved",
+            })
+
+        # 2) Otherwise walk the KB troubleshooting steps, one per turn.
+        steps = self._kb_steps(kb_context)
+        step_idx = len(user_msgs) - 1  # 0-based: first user msg -> first step
+        if steps and step_idx < len(steps):
+            step = steps[step_idx]
+            if step_idx == 0:
+                msg = (f"Thanks for the details - let's start here: {step} "
+                       f"Did that help? If not, tell me what happened.")
+            else:
+                msg = (f"Okay. Next, try this: {step} "
+                       f"Let me know if that resolves it.")
+            return self._clean_turn({"message": msg, "status": "in_progress"})
+
+        # 3) Out of standard steps — hand off to a human.
+        return self._clean_turn({
+            "message": "I've run through the standard steps without luck. I'll escalate "
+                       "this to a technician with everything we've covered so far.",
+            "status": "escalate",
         })
 
     def categorize(self, summary: str) -> dict:
@@ -152,16 +123,9 @@ class OllamaClient(LLMClient):
         self.base_url = config.OLLAMA_BASE_URL.rstrip("/")
         self.model = config.OLLAMA_MODEL
 
-    def _chat_json(self, system: str, user: str) -> dict:
-        payload = {
-            "model": self.model,
-            "messages": [
-                {"role": "system", "content": system},
-                {"role": "user", "content": user},
-            ],
-            "format": "json",   # ask Ollama to constrain output to JSON
-            "stream": False,
-        }
+    def _chat_json(self, messages: list) -> dict:
+        payload = {"model": self.model, "messages": messages,
+                   "format": "json", "stream": False}
         req = self._urllib.Request(
             f"{self.base_url}/api/chat",
             data=json.dumps(payload).encode("utf-8"),
@@ -169,18 +133,19 @@ class OllamaClient(LLMClient):
         )
         with self._urllib.urlopen(req, timeout=120) as resp:
             body = json.loads(resp.read().decode("utf-8"))
-        content = body.get("message", {}).get("content", "{}")
-        return json.loads(content)
+        return json.loads(body.get("message", {}).get("content", "{}"))
 
-    def triage(self, ticket_text: str, kb_context: str) -> dict:
-        system = _triage_system_prompt()
-        user = _triage_user_prompt(ticket_text, kb_context)
-        return self._clean_triage(self._chat_json(system, user))
+    def respond(self, conversation: list, kb_context: str) -> dict:
+        messages = _build_chat(conversation, kb_context)
+        return self._clean_turn(self._chat_json(messages))
 
     def categorize(self, summary: str) -> dict:
-        system = _categorize_system_prompt()
-        user = f"Ticket summary:\n{summary}\n\nReturn JSON: {{category, confidence}}."
-        raw = self._chat_json(system, user)
+        messages = [
+            {"role": "system", "content": _categorize_system_prompt()},
+            {"role": "user", "content": f"Ticket summary:\n{summary}\n\n"
+                                        f"Return JSON: {{category, confidence}}."},
+        ]
+        raw = self._chat_json(messages)
         cat = raw.get("category")
         if cat not in config.CATEGORY_NAMES:
             cat = "Other"
@@ -199,28 +164,31 @@ class AnthropicClient(LLMClient):
         self._client = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY from env
         self.model = config.ANTHROPIC_MODEL
 
-    def _message_json(self, system: str, user: str) -> dict:
-        # Simple JSON-by-instruction + parse. For production you would pin the
-        # shape with output_config.format (structured outputs); kept simple here
-        # so the contract is obvious when reading the code.
+    def _message_json(self, system: str, messages: list) -> dict:
         resp = self._client.messages.create(
-            model=self.model,
-            max_tokens=1024,
-            system=system,
-            messages=[{"role": "user", "content": user}],
+            model=self.model, max_tokens=1024, system=system, messages=messages,
         )
         text = next((b.text for b in resp.content if b.type == "text"), "{}")
         return json.loads(_extract_json(text))
 
-    def triage(self, ticket_text: str, kb_context: str) -> dict:
-        system = _triage_system_prompt()
-        user = _triage_user_prompt(ticket_text, kb_context)
-        return self._clean_triage(self._message_json(system, user))
+    def respond(self, conversation: list, kb_context: str) -> dict:
+        system = _support_system_prompt(kb_context)
+        messages = [
+            {"role": "user" if m["role"] == "user" else "assistant",
+             "content": m["text"]}
+            for m in conversation
+        ]
+        # Nudge the model to answer in the required JSON shape on this turn.
+        messages.append({"role": "user", "content": "Respond with the JSON object "
+                                                     "{message, status} for your next reply."})
+        return self._clean_turn(self._message_json(system, messages))
 
     def categorize(self, summary: str) -> dict:
-        system = _categorize_system_prompt()
-        user = f"Ticket summary:\n{summary}\n\nReturn JSON: {{category, confidence}}."
-        raw = self._message_json(system, user)
+        raw = self._message_json(
+            _categorize_system_prompt(),
+            [{"role": "user", "content": f"Ticket summary:\n{summary}\n\n"
+                                         f"Return JSON: {{category, confidence}}."}],
+        )
         cat = raw.get("category")
         if cat not in config.CATEGORY_NAMES:
             cat = "Other"
@@ -239,25 +207,27 @@ def _load_prompt(name: str, fallback: str) -> str:
     return fallback
 
 
-def _triage_system_prompt() -> str:
-    cats = ", ".join(config.CATEGORY_NAMES)
-    return _load_prompt(
-        "triage_system.txt",
-        f"You are a Tier-1 IT help desk triage assistant. You never take action; "
-        f"you produce a proposal a technician reviews. Respond with a single JSON "
-        f"object with keys: {_TRIAGE_KEYS}. category must be one of: {cats}. "
-        f"priority must be one of: {_PRIORITIES}. confidence is 0-1. missing_info "
-        f"is a list of short questions needed before a technician can act. "
-        f"draft_reply is a polite Tier-1 response for human review.",
+def _support_system_prompt(kb_context: str) -> str:
+    base = _load_prompt(
+        "support_system.txt",
+        "You are a Tier-1 IT help desk technician talking directly to an end user. "
+        "Be concise and friendly. Work the issue one step at a time: ask for the "
+        "minimum information you need, then suggest a concrete fix. Use the knowledge "
+        "base context when relevant. Every turn, respond with a single JSON object "
+        "{\"message\": <your reply to the user>, \"status\": <\"in_progress\" | "
+        "\"resolved\" | \"escalate\">}. Use \"resolved\" only when the user confirms "
+        "the issue is fixed, and \"escalate\" when it needs a human technician.",
     )
+    return f"{base}\n\nKnowledge base context:\n{kb_context or '(none found)'}"
 
 
-def _triage_user_prompt(ticket_text: str, kb_context: str) -> str:
-    return (
-        f"Knowledge base context:\n{kb_context or '(none found)'}\n\n"
-        f"Ticket:\n{ticket_text}\n\n"
-        f"Return only the JSON object."
-    )
+def _build_chat(conversation: list, kb_context: str) -> list:
+    """Map the conversation into provider chat messages with a leading system turn."""
+    messages = [{"role": "system", "content": _support_system_prompt(kb_context)}]
+    for m in conversation:
+        messages.append({"role": "user" if m["role"] == "user" else "assistant",
+                         "content": m["text"]})
+    return messages
 
 
 def _categorize_system_prompt() -> str:
@@ -272,8 +242,7 @@ def _categorize_system_prompt() -> str:
 
 def _extract_json(text: str) -> str:
     """Pull the first {...} block out of a model response, tolerant of prose."""
-    start = text.find("{")
-    end = text.rfind("}")
+    start, end = text.find("{"), text.rfind("}")
     if start != -1 and end != -1 and end > start:
         return text[start:end + 1]
     return "{}"
